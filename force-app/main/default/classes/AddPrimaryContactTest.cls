@@ -23,14 +23,26 @@ public class AddPrimaryContactTest {
     static testmethod void testQueueable() {
         
         List<Account> accounts = [SELECT id, name, (SELECT Id, name FROM Contacts)FROM Account WHERE BillingState='CA'];
-        // Create our Queueable instance
+        Integer countContAfterUpdate = 0;
+       
         AddPrimaryContact adder = new AddPrimaryContact(new Contact(LastName = 'TestQueue'), 'CA');
-        // startTest/stopTest block to force async processes to run
+
+        
         Test.startTest();
         System.enqueueJob(adder);
         Test.stopTest();
-        // Validate the job ran. Check if record have correct parentId now
-        System.assertEquals(50, [SELECT count() FROM Account WHERE BillingState='CA']);
+        
+        List<Account> accs = [SELECT id, (SELECT Id FROM Contacts)FROM Account WHERE BillingState='CA'];
+        
+        
+        for(Account acc : accs){
+            if(acc.Contacts.size()==1){
+                countContAfterUpdate++;
+            } 
+        }
+        
+        
+        System.assertEquals(50, countContAfterUpdate);
     }
     
     
