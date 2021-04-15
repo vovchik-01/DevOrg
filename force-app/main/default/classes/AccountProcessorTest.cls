@@ -4,7 +4,7 @@ public class AccountProcessorTest {
     private static void testAccountProcessor() {
         List<Account> res = new List<Account>();
         for(Integer i = 0; i<250; i++){
-            Account acc = new Account(Name='Test Name1'+i);
+            Account acc = new Account(Name='Test Name'+i);
             Contact con = new Contact(LastName = 'NewName'+i,
                                       Id = acc.Id);
             

@@ -14,7 +14,7 @@ global class AccountProcessor {
             acc.Number_of_Contacts__c = acc.Contacts.size();
             accForUpdate.add(acc); 
         }
-        System.debug('Hey!');
+        
         if(accForUpdate.size() > 0){
             update accForUpdate;
         }
