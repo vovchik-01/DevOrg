@@ -23,6 +23,7 @@ private class AnimalsCalloutsTest {
         // Verify the array contains 3 items     
         Map<String, Object> results = (Map<String, Object>) 
             JSON.deserializeUntyped(result.getBody());
+            System.debug('ghj');
         List<Object> animals = (List<Object>) results.get('animals');
         System.assertEquals(3, animals.size(),
           'The array should only contain 3 items.');          
